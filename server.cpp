@@ -76,7 +76,7 @@ void initConnection()
 
         while (true)
         {
-            memset(buf, 0, 4096);
+            ZeroMemory(buf, 0);
 
             int bytes = recv(clientSocket, buf, 4096, 0);
 
@@ -91,7 +91,7 @@ void initConnection()
                 break;
             }
 
-            send(clientSocket, buf, bytes + 2, 0);
+            send(clientSocket, buf, bytes + 1, 0);
         }
 
         closesocket(clientSocket);
