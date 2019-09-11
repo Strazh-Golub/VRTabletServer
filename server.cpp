@@ -100,23 +100,13 @@ void initConnection()
     }
 }
 
-void loop()
+void run()
 {
     initConnection();
-    while (!CloseWindow(window))
-    {
-        if(GetAsyncKeyState(VK_ESCAPE))
-        {
-            closesocket(clientSocket);
-            closesocket(listening);
-            CloseWindow(window);
-        }
-    }
-
 }
 
 int main()
 {
-    loop();
+    run();
     return 0;
 }
