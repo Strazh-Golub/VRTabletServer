@@ -40,7 +40,7 @@ void initConnection()
     sockaddr_in client;
     int client_size = sizeof(client);
 
-    clientSocket = accept(listening, (sockaddr*) &hint, &client_size);
+    clientSocket = accept(listening, (sockaddr*) &client, &client_size);
 
     if (clientSocket == INVALID_SOCKET)
     {
@@ -67,18 +67,18 @@ void initConnection()
         {
             inet_ntop(AF_INET, &client.sin_addr, host, NI_MAXHOST);
 
-            cout << host << "connected on port " << ntohs(client.sin_addr.S_un.S_addr) << endl;
+            cout << host << "connected on port " << ntohs((u_short)&client.sin_addr) << endl;
         }
 
         closesocket(listening);
 
-        char *buf;
+        char buf[4096];
 
         while (true)
         {
-            memset(buf, 0, sizeof(buf)/sizeof(char*));
+            memset(buf, 0, 4096);
 
-            int bytes = recv(clientSocket, buf, sizeof(buf)/sizeof(char*), 0);
+            int bytes = recv(clientSocket, buf, 4096, 0);
 
             if (bytes == SOCKET_ERROR)
             {
