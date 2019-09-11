@@ -1,3 +1,3 @@
 ﻿  server.cpp
-C:\Users\golub\Desktop\VRTabletServer\server.cpp(73,77): warning C4302:  'type cast': truncation from 'IN_ADDR *' to 'u_short'
+C:\Users\golub\Desktop\VRTabletServer\server.cpp(74,77): warning C4302:  'type cast': truncation from 'IN_ADDR *' to 'u_short'
   VRTabletServer.vcxproj -> C:\Users\golub\Desktop\VRTabletServer\Debug\VRTabletServer.exe

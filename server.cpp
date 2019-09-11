@@ -1,5 +1,6 @@
 #include<iostream>
 #include<ws2tcpip.h>
+#include<string>
 using namespace std;
 
 #pragma comment (lib, "ws2_32.lib")
@@ -103,7 +104,11 @@ void initConnection()
                 break;
             }
 
-            send(clientSocket, buf, bytes + 1, 0);
+			cin >> buf;			
+
+			send(clientSocket, buf, bytes + 1, 0);
+
+			cout << endl;
         }
 
         closesocket(clientSocket);
