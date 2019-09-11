@@ -2,11 +2,15 @@
 #include<ws2tcpip.h>
 using namespace std;
 
+#pragma comment (lib, "ws2_32.lib")
+
 WSADATA wsData;
 WORD version = MAKEWORD(2, 2);
 int wsOK = WSAStartup(version, &wsData);
 SOCKET clientSocket;
 SOCKET listening;
+
+HWND window = GetConsoleWindow();
 
 void initConnection()
 {
@@ -55,7 +59,7 @@ void initConnection()
 
         Sleep(5000);
 
-        if(getnameinfo((sockaddr*)&client, sizeof(client), host, NI_MAXHOST, service, NI_MAXSERV, 0) == 0)
+        if(getnameinfo((sockaddr*) &client, sizeof(client), host, NI_MAXHOST, service, NI_MAXSERV, 0) == 0)
         {
             cout << host << "connected on port " << service << endl;
         }
@@ -63,7 +67,7 @@ void initConnection()
         {
             inet_ntop(AF_INET, &client.sin_addr, host, NI_MAXHOST);
 
-            cout << host << "connected on port " << ntohs(client.sin_addr) << endl;
+            cout << host << "connected on port " << ntohs(client.sin_addr.S_un.S_addr) << endl;
         }
 
         closesocket(listening);
