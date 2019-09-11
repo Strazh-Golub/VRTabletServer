@@ -83,6 +83,7 @@ void initConnection()
             if (bytes == SOCKET_ERROR)
             {
                 cerr << "Could not recieve data from client! Closing Application!" << endl;
+				break;
             }
             else if(bytes == 0)
             {
