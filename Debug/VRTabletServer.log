@@ -1,0 +1,4 @@
+﻿  server.cpp
+C:\Users\golub\Desktop\VRTabletServer\server.cpp(70,76): warning C4302:  'type cast': truncation from 'IN_ADDR *' to 'u_short'
+C:\Users\golub\Desktop\VRTabletServer\server.cpp(79): warning C4700:  uninitialized local variable 'buf' used
+  VRTabletServer.vcxproj -> C:\Users\golub\Desktop\VRTabletServer\Debug\VRTabletServer.exe
