@@ -61,7 +61,7 @@ void initConnection()
 
         if(getnameinfo((sockaddr*) &client, sizeof(client), host, NI_MAXHOST, service, NI_MAXSERV, 0) == 0)
         {
-            cout << host << "connected on port " << service << endl;
+            cout << host << " connected on port " << service << endl;
         }
         else
         {
