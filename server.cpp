@@ -52,8 +52,8 @@ void initConnection()
         char host[NI_MAXHOST];
         char service[NI_MAXSERV];
 
-        memset(host, 0, NI_MAXHOST);
-        memset(service, 0, NI_MAXSERV);
+        ZeroMemory(host, 0);
+        ZeroMemory(service, 0);
 
         cout << "Waiting for connection..." << endl;
 
