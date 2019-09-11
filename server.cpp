@@ -55,20 +55,32 @@ void initConnection()
         ZeroMemory(host, 0);
         ZeroMemory(service, 0);
 
+		int triesRemaining = 5;
+
         cout << "Waiting for connection..." << endl;
 
-        Sleep(5000);
+		while (triesRemaining > 0)
+		{
+			if (getnameinfo((sockaddr*)& client, sizeof(client), host, NI_MAXHOST, service, NI_MAXSERV, 0) == 0)
+			{
+				cout << host << " connected on port " << service << endl;
+				break;
+			}
+			else
+			{
+				inet_ntop(AF_INET, &client.sin_addr, host, NI_MAXHOST);
 
-        if(getnameinfo((sockaddr*) &client, sizeof(client), host, NI_MAXHOST, service, NI_MAXSERV, 0) == 0)
-        {
-            cout << host << " connected on port " << service << endl;
-        }
-        else
-        {
-            inet_ntop(AF_INET, &client.sin_addr, host, NI_MAXHOST);
-
-            cout << host << "connected on port " << ntohs((u_short)&client.sin_addr) << endl;
-        }
+				cout << host << "connected on port " << ntohs((u_short)& client.sin_addr) << endl;
+				break;
+			}
+			Sleep(1000);
+			triesRemaining--;
+			if (triesRemaining == 0)
+			{
+				cerr << "Could not connect VR Tablet Headset to server! Closing!" << endl;
+				break;
+			}
+		}
 
         closesocket(listening);
 
