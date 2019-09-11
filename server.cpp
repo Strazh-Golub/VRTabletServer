@@ -91,7 +91,7 @@ void initConnection()
                 break;
             }
 
-            send(clientSocket, buf, bytes + 1, 0);
+            send(clientSocket, buf, bytes + 2, 0);
         }
 
         closesocket(clientSocket);
