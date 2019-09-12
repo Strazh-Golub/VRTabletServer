@@ -1,18 +1,18 @@
 #include<iostream>
 #include<WS2tcpip.h>
 #include<string>
-#include<istream>
 using namespace std;
 
 #pragma comment (lib, "ws2_32.lib")
 
+SOCKET sock;
+sockaddr_in serv_addr;
+char buffer[4096];
+string ip;
+
 void initClientConnection()
 {
-	int sock = 0;
-	sockaddr_in serv_addr;
-	char buffer[4096];
 	sock = socket(AF_INET, SOCK_STREAM, 0);
-	string ip;
 	if (sock == INVALID_SOCKET)
 	{
 		cerr << "Could not create socket! Closing Client!" << endl;
@@ -33,21 +33,18 @@ void initClientConnection()
 	if (connect(sock, (sockaddr*)& serv_addr, sizeof(serv_addr)) == 0)
 	{
 		cout << "VR Headset Connected!" << endl;
-		send(sock, "Connected to VRTabletServer!", strlen("Connected to VRTabletServer!"), 0);
-		istream stream((istream::_Mysb*) & cin, true);
-		stream.read(buffer, 4096);
-		while (true)
-		{
-			cin >> buffer;
-			send(sock, buffer, 4096, 0);
-			cout << endl;
-		}
-		
+		send(sock, "Connected to VRTabletServer!", strlen("Connected to VRTabletServer!"), 0);		
 	}
 }
 
 int main()
 {
 	initClientConnection();
+	while (true)
+	{
+		cin >> buffer;
+		send(sock, buffer, 4096, 0);
+		cout << endl;
+	}
 	return 0;
 }
