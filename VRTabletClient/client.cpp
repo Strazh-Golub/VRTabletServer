@@ -8,7 +8,7 @@ using namespace std;
 
 void initClientConnection()
 {
-	int sock = 0, valread;
+	int sock = 0;
 	sockaddr_in serv_addr;
 	char buffer[4096];
 	sock = socket(AF_INET, SOCK_STREAM, 0);
@@ -34,8 +34,15 @@ void initClientConnection()
 	{
 		cout << "VR Headset Connected!" << endl;
 		send(sock, "Connected to VRTabletServer!", strlen("Connected to VRTabletServer!"), 0);
-		istream stream((istream::_Mysb*)&cin, true);
+		istream stream((istream::_Mysb*) & cin, true);
 		stream.read(buffer, 4096);
+		while (true)
+		{
+			cin >> buffer;
+			send(sock, buffer, 4096, 0);
+			cout << endl;
+		}
+		
 	}
 }
 
