@@ -32,8 +32,7 @@ void initClientConnection()
 
 	if (connect(sock, (sockaddr*)& serv_addr, sizeof(serv_addr)) == 0)
 	{
-		cout << "VR Headset Connected!" << endl;
-		send(sock, "Connected to VRTabletServer!", strlen("Connected to VRTabletServer!"), 0);		
+		cout << "VR Headset Connected!" << endl;	
 	}
 }
 
