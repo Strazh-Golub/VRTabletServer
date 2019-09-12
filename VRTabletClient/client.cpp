@@ -20,9 +20,8 @@ void initClientConnection()
 	}
 
 	serv_addr.sin_family = AF_INET;
-	serv_addr.sin_port = 54000;
 
-	getline(cin, ip);
+	serv_addr.sin_port = htons(54000);
 
 	if (inet_pton(serv_addr.sin_family, (PCSTR) &ip, &serv_addr.sin_addr) <= 0)
 	{
@@ -32,12 +31,13 @@ void initClientConnection()
 
 	if (connect(sock, (sockaddr*)& serv_addr, sizeof(serv_addr)) == 0)
 	{
-		cout << "VR Headset Connected!" << endl;	
+		cout << "VR Headset Connected!" << endl;
 	}
 }
 
 int main()
 {
+	getline(cin, ip);
 	initClientConnection();
 	while (true)
 	{
